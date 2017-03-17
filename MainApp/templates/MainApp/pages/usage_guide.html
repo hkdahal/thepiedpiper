@@ -1,0 +1,82 @@
+{% extends 'MainApp/base.html' %}
+
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h3>result table </h3>
+        <ul>
+
+            <li>Enter Artist's name in the box, and click Search to look up
+                search results.
+            </li>
+            <li>This can also be done by clicking on any <code>saved artist</code></li>
+            <li>it takes the artist's name, and makes a call to Apple's API</li>
+            <li>the returned json data is being processed to display the table
+            </li>
+
+            <li>the table has pagination and you can 'save result' and 'download
+                result'
+            </li>
+            <li>demo: <a href="http://127.0.0.1:8000/"><code>http://127.0.0.1:8000/</code></a></li>
+        </ul>
+
+        <h3>save result</h3>
+        <ul>
+            <li>saving a result means saving processed json result
+                as a file <kbd>&lt;artist_name&gt;.json</kbd> in <kbd>MainApp/saved-data</kbd> directory
+            </li>
+            <li>a data is saved after clicking on 'save result' and click on
+                'yes'
+            </li>
+            <li>with an ajax call, animation for downloading and saving is
+                shown
+            </li>
+            <li>it quickly adds the name of the artist to the saved_artists
+                list
+            </li>
+        </ul>
+
+        <h3>download result</h3>
+        <ul>
+            <li>just clicking on 'download result'</li>
+
+            <li>downloading a result means allowing a user to download the
+                processed json
+            </li>
+            <li>result so that user can upload it later</li>
+            <li>demo: <a href="http://127.0.0.1:8000/api/artist/jack johnson" download><code>/api/artist/jack johnson</code></a></li>
+            <li>json: <a href="http://127.0.0.1:8000/api/artist/jack johnson"><code>/api/artist/jack johnson</code></a></li>
+        </ul>
+
+        <h3>upload result</h3>
+        <ul>
+
+            <li>url -> <kbd>/load-file</kbd></li>
+
+            <li>click on browse and look for .json file</li>
+
+            <li>then click upload (this button is disabled till a file is
+                selected)
+            </li>
+
+            <li>soon as upload is complete, it redirects users to home page with
+                the result table
+            </li>
+            <li>demo: <a href="/load-file"><code>/load-file</code></a></li>
+        </ul>
+
+        <h3>track details</h3>
+        <ul>
+            <li>==> url -> <kbd>/details/&lt;track_id&gt; </kbd></li>
+            <li>==> click on any track shown in the result table</li>
+
+            <li>calls Apple's API with the selected track id</li>
+
+            <li>shows details of selected track including artwork and preview
+                audio
+            </li>
+            <li>demo: <a href="/details/858518134"><code>/details/858518134</code></a></li>
+        </ul>
+
+
+    </div>
+{% endblock %}

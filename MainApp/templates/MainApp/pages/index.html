@@ -1,0 +1,56 @@
+{% extends 'MainApp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <form action="/" method="post" class="form-inline">
+            {% csrf_token %}
+            {{ form }}
+
+            <input type="submit"
+                   value="{% if saved_data %}Refresh Results{% else %}Search{% endif %}"
+                   class="btn btn-primary"/>
+        </form>
+
+
+        <div id="savedArtistsDetails">
+            {% if saved_artists %}
+                <br>Saved artists:
+                {% for artist in saved_artists %}
+                    <code><a href="/show/{{ artist }}">{{ artist }}</a></code>
+
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% if url %}
+            <br>
+            <br>
+
+            <div id='loadingMessage' style='display:none'>
+                <img src='https://d368g9lw5ileu7.cloudfront.net/img/rsuWaitingLarge.bwo7Y7.gif'/><br>
+                <img src='https://4.bp.blogspot.com/-m-M0doCYTeE/V_CgCGtKXII/AAAAAAAACCY/phrSWiKZ7VIQRNB-_uqRq2pCfkA4FGC7QCLcB/s640/progressbar2.gif'/>
+            </div>
+
+            <table id="datatable" class="display" width="100%" cellspacing="0">
+                <thead></thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
+            {% if term %}
+                {% include 'MainApp/pages/save_modal.html' %}
+            {% endif %}
+            <a class="btn btn-warning btn-md" id="downloadBtn" style='display:none' href="{{ url }}" download>
+                Download Result
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% if url %}
+    {% block script %}
+        {% include 'MainApp/pages/script.html' %}
+    {% endblock %}
+
+{% endif %}

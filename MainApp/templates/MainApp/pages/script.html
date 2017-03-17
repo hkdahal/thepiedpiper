@@ -1,0 +1,87 @@
+<script>
+    $(document).ready(function () {
+
+        var url = '{{ url }}';
+        $('#loadingMessage').show();
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function (jsonData) {
+                $('#datatable').dataTable({
+                    data: jsonData,
+                    columns: [
+                        {
+                            title: 'Track ID',
+                            data: 'trackId',
+                            defaultContent: 'Null'
+                        },
+                        {
+                            title: 'Artist Name',
+                            data: 'artistName',
+                            defaultContent: 'Null'
+                        },
+                        {
+                            title: 'Track Name',
+                            data: 'trackName',
+                            defaultContent: 'Null'
+                        },
+                        {
+                            title: 'Release Date',
+                            data: 'releaseDate',
+                            defaultContent: 'Null'
+                        }
+                    ]
+                });
+                $('#loadingMessage').hide();
+                $('#myButton').show();
+                $('#downloadBtn').show()
+
+            }
+        });
+
+        $('#datatable').on('mouseover', 'tbody tr', function () {
+            $(this).css({
+                'cursor': 'pointer',
+                'color': 'blue'
+            });
+        })
+
+        $('#datatable').on('mouseout', 'tbody tr', function () {
+            $(this).css({
+                'cursor': 'default',
+                'color': 'inherit'
+            });
+        })
+
+        $('#datatable').on('click', 'tbody tr', function () {
+            var url = '/details/' + $(this).children(':first').text();
+            window.location.assign(url);
+        });
+
+
+    });
+
+
+    {% if term %}
+        $('#yesButton').click(function (e) {
+            e.preventDefault(); // prevent form from reloading page
+
+            $.ajax({
+                'url': '/save/{{ term }}',
+                'type': 'GET',
+                beforeSend: function () {
+                    $('.theContent').hide();
+                    $('.uploadingMessage').show();
+                },
+                error: function () {
+                    alert('Error');
+                },
+                'success': function (data) {
+                    $('.uploadingMessage').hide();
+                    $('.savedMessage').show();
+                    $('#savedArtistsDetails').append('<code><a href="/show/{{ term }}">{{ term }}</a></code>')
+                }
+            });
+        });
+    {% endif %}
+</script>

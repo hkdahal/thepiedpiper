@@ -1,0 +1,41 @@
+{% extends 'MainApp/base.html' %}
+{% load filters %}
+
+{% block content %}
+    <div class="col col-md-4 col-sm-offset-2 main">
+        <h3>{{ data.trackName }}<br>
+            <i>By {{ data.artistName }}</i></h3>
+
+        <ul>
+            <li>Collection Name: {{ data.collectionName }}</li>
+            <li>Collection Price: ${{ data.collectionPrice }}</li>
+            <li>Track Price: ${{ data.trackPrice }}</li>
+            <li>Track Number: {{ data.trackNumber }}</li>
+            <li>Track Count: {{ data.trackCount }}</li>
+            <li>Kind: {{ data.kind }}</li>
+            <li>Primary Genre Name: {{ data.primaryGenreName }}</li>
+        </ul>
+    </div>
+{% endblock content %}
+
+{% block image_block %}
+    <div class="col col-md-4 main">
+
+        <img src="{{ data.artworkUrl100|image_300 }}"
+             class="rounded float-right">
+        <br>
+        <br>
+        <i>Preview: </i><br>
+        <audio controls preload="none" style="width: 300px;">
+            <source src="{{ data.previewUrl }}" type="audio/mp4"/>
+            <p>Your browser does not support HTML5 audio.</p>
+        </audio>
+    </div>
+{% endblock %}
+
+
+{% block additional_content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h3> In this collection: </h3>
+    </div>
+{% endblock %}
