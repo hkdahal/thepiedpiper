@@ -2,9 +2,9 @@
 Interview Project Given by Eaton.
 
 Click here to read instructions on how-to run this project:
-[HOW-TO.md](PiedPiper/HOW-TO.md)
+[HOW-TO.md](HOW-TO.md)
 
-Usage Guide: [Usage-Guide.md](PiedPiper/Usage-Guide.md)
+Usage Guide: [Usage-Guide.md](Usage-Guide.md)
 
 **EXPECTED SUBMISSION TIME:**
 Tuesday 03/14. 6:00 AM EST
